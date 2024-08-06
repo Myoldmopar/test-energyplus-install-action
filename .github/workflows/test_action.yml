@@ -7,7 +7,7 @@ jobs:
     steps:
       - name: EnergyPlus Install Script
         id: eplus
-        uses: myoldmopar/energyplus-install@v0.1
+        uses: myoldmopar/energyplus-install@21d5c38f3d6cbda3d7ac70d8e7d50005c7c5b212
         with:
           version: '24.1.0'
       - name: Get the eplus dir
