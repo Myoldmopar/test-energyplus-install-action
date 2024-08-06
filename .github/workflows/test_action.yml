@@ -12,6 +12,8 @@ jobs:
           version: '24.1.0'
       - name: Get the eplus dir
         run: echo "E+ is available at ${{ steps.eplus.outputs.energyplus_path }}"
+      - name: Setup upterm session
+        uses: lhotari/action-upterm@v1
       - name: Add E+ dir to path
         run: echo "${{ steps.eplus.outputs.energyplus_path }}" >> $GITHUB_PATH
       - name: Try to run E+ with full path
