@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: EnergyPlus Install Script
         id: eplus
-        uses: myoldmopar/energyplus-install@585e4c1105308e01f023f88c14ff1cf6ed62cce0
+        uses: myoldmopar/energyplus-install@46a2a6b5e137e88ba4973fe827b751b282ad2f2c
         with:
           tag: 'v24.1.0'
       - name: Get the eplus dir
@@ -21,6 +21,13 @@ jobs:
         run: echo "${{ steps.eplus.outputs.energyplus_path }}" >> $GITHUB_PATH
       - name: Try to run E+ with full path
         run: ${{ steps.eplus.outputs.energyplus_path }}/energyplus -D ${{ steps.eplus.outputs.energyplus_path }}/ExampleFiles/1ZoneUncontrolled.idf
-      - name: Try to run E+ from PATH
+      - name: Try to run E+ from PATH WITHOUT extension
+        if: ${{ matrix.os == 'ubuntu-24.04' }}
         run: energyplus --help
+      - name: Try to run E+ from PATH WITHOUT extension
+        if: ${{ matrix.os == 'macos-12' }}
+        run: energyplus --help  
+      - name: Try to run E+ from PATH WITH extension
+        if: ${{ matrix.os == 'windows-latest' }}
+        run: energyplus.exe --help  
         
