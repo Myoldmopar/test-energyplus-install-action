@@ -12,3 +12,10 @@ jobs:
           version: '24.1.0'
       - name: Get the eplus dir
         run: echo "E+ is available at ${{ steps.eplus.outputs.energyplus_path }}"
+      - name: Add E+ dir to path
+        run: echo "${{ steps.eplus.outputs.energyplus_path }}" >> $GITHUB_PATH
+      - name: Try to run E+ with full path
+        run: ${{ steps.eplus.outputs.energyplus_path }}/energyplus -D ${{ steps.eplus.outputs.energyplus_path }}/ExampleFiles/1ZoneUncontrolled.idf
+      - name: Try to run E+ from PATH
+        run: energyplus --help
+        
