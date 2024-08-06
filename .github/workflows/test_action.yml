@@ -2,7 +2,10 @@ on: [push]
 
 jobs:
   energyplus_install:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ windows-latest, macos-12, ubuntu-24.04 ]
+    runs-on: ${{ matrix.os }}
     name: Let us install EnergyPlus
     steps:
       - name: EnergyPlus Install Script
