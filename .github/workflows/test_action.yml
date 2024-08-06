@@ -7,9 +7,9 @@ jobs:
     steps:
       - name: EnergyPlus Install Script
         id: eplus
-        uses: myoldmopar/energyplus-install@0ddcf28b2d9b60a695fd1c177dd69bd0523c35f1
+        uses: myoldmopar/energyplus-install@585e4c1105308e01f023f88c14ff1cf6ed62cce0
         with:
-          version: '24.1.0'
+          tag: 'v24.1.0'
       - name: Get the eplus dir
         run: echo "E+ is available at ${{ steps.eplus.outputs.energyplus_path }}"
       # - name: Setup upterm session
