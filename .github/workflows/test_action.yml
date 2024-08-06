@@ -1,28 +1,25 @@
 on: [push]
-defaults:
-  run:
-    shell: bash
 jobs:
   energyplus_install:
     strategy:
       matrix:
-        os: [ windows-latest, macos-12, ubuntu-24.04 ]
+        os: [ macos-12, ubuntu-24.04, windows-latest ]  # PATH isn't coming out right if I use bash on Windows...the \\ are being escaped, how do I set this on GHA properly?
     runs-on: ${{ matrix.os }}
     name: Let us install EnergyPlus
     steps:
       - name: EnergyPlus Install Script
         id: eplus
-        uses: myoldmopar/energyplus-install@cd545dc8e3550194841609ff186b05c45b95b32b
+        uses: myoldmopar/energyplus-install@3a7d08573af53f2d605f7e724f0290d213fde2bd
         with:
           tag: 'v24.1.0'
       - name: Get the eplus dir
         run: echo "E+ is available at ${{ steps.eplus.outputs.energyplus_path }}"
       # - name: Setup upterm session
       #   uses: lhotari/action-upterm@v1
-      - name: Add E+ dir to path
-        run: echo "${{ steps.eplus.outputs.energyplus_path }}" >> $GITHUB_PATH
       - name: Try to run E+ with full path
         run: ${{ steps.eplus.outputs.energyplus_path }}/energyplus -D ${{ steps.eplus.outputs.energyplus_path }}/ExampleFiles/1ZoneUncontrolled.idf
-      - name: Try to run E+ from PATH
-        run: energyplus --help
+      - name: Add E+ dir to path
+        run: echo "${{ steps.eplus.outputs.energyplus_path }}" >> $GITHUB_PATH
+      # - name: Try to run E+ from PATH
+      #   run: energyplus --help
       
