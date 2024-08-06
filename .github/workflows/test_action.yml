@@ -1,5 +1,7 @@
 on: [push]
-
+defaults:
+  run:
+    shell: bash
 jobs:
   energyplus_install:
     strategy:
@@ -21,13 +23,6 @@ jobs:
         run: echo "${{ steps.eplus.outputs.energyplus_path }}" >> $GITHUB_PATH
       - name: Try to run E+ with full path
         run: ${{ steps.eplus.outputs.energyplus_path }}/energyplus -D ${{ steps.eplus.outputs.energyplus_path }}/ExampleFiles/1ZoneUncontrolled.idf
-      - name: Try to run E+ from PATH WITHOUT extension
-        if: ${{ matrix.os == 'ubuntu-24.04' }}
+      - name: Try to run E+ from PATH
         run: energyplus --help
-      - name: Try to run E+ from PATH WITHOUT extension
-        if: ${{ matrix.os == 'macos-12' }}
-        run: energyplus --help  
-      - name: Try to run E+ from PATH WITH extension
-        if: ${{ matrix.os == 'windows-latest' }}
-        run: energyplus.exe --help  
-        
+      
