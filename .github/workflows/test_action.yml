@@ -7,13 +7,13 @@ jobs:
     steps:
       - name: EnergyPlus Install Script
         id: eplus
-        uses: myoldmopar/energyplus-install@03f8a234677fce1216bd5e493bf16d986a4b7178
+        uses: myoldmopar/energyplus-install@0ddcf28b2d9b60a695fd1c177dd69bd0523c35f1
         with:
           version: '24.1.0'
       - name: Get the eplus dir
         run: echo "E+ is available at ${{ steps.eplus.outputs.energyplus_path }}"
-      - name: Setup upterm session
-        uses: lhotari/action-upterm@v1
+      # - name: Setup upterm session
+      #   uses: lhotari/action-upterm@v1
       - name: Add E+ dir to path
         run: echo "${{ steps.eplus.outputs.energyplus_path }}" >> $GITHUB_PATH
       - name: Try to run E+ with full path
