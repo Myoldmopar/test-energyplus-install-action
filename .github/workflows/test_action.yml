@@ -19,7 +19,7 @@ jobs:
       # - name: Setup upterm session
       #   uses: lhotari/action-upterm@v1
       - name: Try to run E+ with full path
-        run: ${{ steps.eplus.outputs.energyplus_path }}/energyplus -D ${{ steps.eplus.outputs.energyplus_path }}/ExampleFiles/1ZoneUncontrolled.idf
+        run: ${{ steps.eplus.outputs.energyplus_directory }}/energyplus -D ${{ steps.eplus.outputs.energyplus_directory }}/ExampleFiles/1ZoneUncontrolled.idf
       # Set up a step that installs energyplus_api_helper(s) and runs a quick API test passing in the e+ path
       # - name: Try to run E+ from PATH
       #   run: energyplus --help
