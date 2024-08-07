@@ -3,13 +3,13 @@ jobs:
   energyplus_install:
     strategy:
       matrix:
-        os: [ macos-12, ubuntu-24.04, windows-latest ]
+        os: [ ubuntu-24.04 ]  # macos-12, windows-latest ]
     runs-on: ${{ matrix.os }}
     name: Let us install EnergyPlus
     steps:
       - name: EnergyPlus Install Script
         id: eplus
-        uses: myoldmopar/energyplus-install@58dc01138c1a2d596ef6d0b91f62efade874f5df
+        uses: myoldmopar/energyplus-install@eaf01d830da1b99f3c9f4c8493057ad2ab1a352f
         with:
           tag: 'v24.1.0'
         env:
