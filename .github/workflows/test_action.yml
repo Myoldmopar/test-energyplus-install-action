@@ -7,13 +7,14 @@ jobs:
     runs-on: ${{ matrix.os }}
     name: Let us install EnergyPlus
     steps:
+      - uses: actions/checkout@v4
       - name: Set up Python
         uses: actions/setup-python@v5.1.0
         with:
           python-version: 3.12
       - name: EnergyPlus Install Script
         id: eplus
-        uses: myoldmopar/energyplus-install@4ca75c3ac221e478acbdfe24360569e246e51264
+        uses: myoldmopar/energyplus-install@751e152f903f5dabaf294f1e196c05bcc8e1314b
         with:
           tag: 'v24.1.0'
         env:
