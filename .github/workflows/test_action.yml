@@ -3,25 +3,24 @@ jobs:
   energyplus_install:
     strategy:
       matrix:
-        os: [ macos-12, ubuntu-24.04, windows-latest ]  # PATH isn't coming out right if I use bash on Windows...the \\ are being escaped, how do I set this on GHA properly?
+        os: [ macos-12, ubuntu-24.04, windows-latest ]
     runs-on: ${{ matrix.os }}
     name: Let us install EnergyPlus
     steps:
       - name: EnergyPlus Install Script
         id: eplus
-        uses: myoldmopar/energyplus-install@d01f754edc0686d6f31e083c85e00abbf30794bb
+        uses: myoldmopar/energyplus-install@00639709a934f8094275f42cdfd5af8839d61808
         with:
           tag: 'v24.1.0'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
       - name: Get the eplus dir
-        run: echo "E+ is available at ${{ steps.eplus.outputs.energyplus_path }}"
+        run: echo "E+ is available at ${{ steps.eplus.outputs.energyplus_directory }}"
       # - name: Setup upterm session
       #   uses: lhotari/action-upterm@v1
       - name: Try to run E+ with full path
         run: ${{ steps.eplus.outputs.energyplus_path }}/energyplus -D ${{ steps.eplus.outputs.energyplus_path }}/ExampleFiles/1ZoneUncontrolled.idf
-      - name: Add E+ dir to path
-        run: echo "${{ steps.eplus.outputs.energyplus_path }}" >> $GITHUB_PATH
-      - name: Inspect path
-        run: echo "PATH is '${GITHUB_PATH}'"
+      # Set up a step that installs energyplus_api_helper(s) and runs a quick API test passing in the e+ path
       # - name: Try to run E+ from PATH
       #   run: energyplus --help
       
