@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: EnergyPlus Install Script
         id: eplus
-        uses: myoldmopar/energyplus-install@a2bbb43ad1ba88575428b720d4700d45fb9e28b0
+        uses: myoldmopar/energyplus-install@d52c537fca8a20e82afe6e09fbca1e2b25ecb6eb
         with:
           tag: 'v24.1.0'
         env:
@@ -20,7 +20,8 @@ jobs:
       #   uses: lhotari/action-upterm@v1
       - name: Try to run E+ with full path
         run: ${{ steps.eplus.outputs.energyplus_directory }}/energyplus -D ${{ steps.eplus.outputs.energyplus_directory }}/ExampleFiles/1ZoneUncontrolled.idf
-      # Set up a step that installs energyplus_api_helper(s) and runs a quick API test passing in the e+ path
-      # - name: Try to run E+ from PATH
-      #   run: energyplus --help
+      - name: Install API Helper
+        run: pip install energyplus_api_helpers
+      - name: Try to run E+ from API
+        run: ./main.py ${{ steps.eplus.outputs.energyplus_directory }}
       
