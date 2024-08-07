@@ -28,5 +28,5 @@ jobs:
         run: pip install energyplus_api_helpers
       - name: Try to run E+ from API
         shell: bash
-        run: python ./main.py ${{ steps.eplus.outputs.energyplus_directory }}
+        run: python main.py ${{ steps.eplus.outputs.energyplus_directory }}
       
