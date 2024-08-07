@@ -14,7 +14,7 @@ jobs:
           python-version: 3.12
       - name: EnergyPlus Install Script
         id: eplus
-        uses: myoldmopar/energyplus-install@193db5168f9f2250a553edfd375cefec89a3d396
+        uses: myoldmopar/energyplus-install@v0.2
         with:
           tag: 'v24.1.0'
         env:
