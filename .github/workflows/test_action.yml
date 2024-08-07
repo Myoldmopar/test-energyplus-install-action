@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: EnergyPlus Install Script
         id: eplus
-        uses: myoldmopar/energyplus-install@bd2f478354e9907ad485b42119d28af04b6d70fc
+        uses: myoldmopar/energyplus-install@58dc01138c1a2d596ef6d0b91f62efade874f5df
         with:
           tag: 'v24.1.0'
         env:
