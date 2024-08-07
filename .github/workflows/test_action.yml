@@ -19,15 +19,10 @@ jobs:
           tag: 'v24.1.0'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
-      - name: Get the eplus dir
-        run: echo "E+ is available at ${{ steps.eplus.outputs.energyplus_directory }}"
-      # - name: Setup upterm session
-      #   uses: lhotari/action-upterm@v1
       - name: Try to run E+ with full path
         run: ${{ steps.eplus.outputs.energyplus_directory }}/energyplus -D ${{ steps.eplus.outputs.energyplus_directory }}/ExampleFiles/1ZoneUncontrolled.idf
       - name: Install API Helper
         run: pip install energyplus_api_helpers
       - name: Try to run E+ from API
-        shell: bash
         run: python main.py ${{ steps.eplus.outputs.energyplus_directory }}
       
