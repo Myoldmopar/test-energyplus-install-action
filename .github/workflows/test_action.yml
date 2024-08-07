@@ -20,6 +20,8 @@ jobs:
         run: ${{ steps.eplus.outputs.energyplus_path }}/energyplus -D ${{ steps.eplus.outputs.energyplus_path }}/ExampleFiles/1ZoneUncontrolled.idf
       - name: Add E+ dir to path
         run: echo "${{ steps.eplus.outputs.energyplus_path }}" >> $GITHUB_PATH
+      - name: Inspect path
+        run: echo "PATH is '${GITHUB_PATH}'"
       # - name: Try to run E+ from PATH
       #   run: energyplus --help
       
