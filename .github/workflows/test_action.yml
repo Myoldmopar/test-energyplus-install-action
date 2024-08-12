@@ -3,7 +3,19 @@ jobs:
   energyplus_install:
     strategy:
       matrix:
-        os: [ ubuntu-22.04, ubuntu-24.04, macos-12, macos-14, windows-latest ]
+        include:
+          - os: ubuntu-22.04
+            hardened: false
+          - os: ubuntu-24.04
+            hardened: false
+          - os: macos-12
+            hardened: false
+          - os: macos-14
+            hardened: false
+          - os: windows-latest
+            hardened: false
+          - os: windows-latest
+            hardened: true            
     runs-on: ${{ matrix.os }}
     name: Let us install EnergyPlus
     steps:
@@ -17,6 +29,7 @@ jobs:
         uses: myoldmopar/energyplus-install@4b3ffb2826cd67bda78f64505a674a32cbb4a934
         with:
           tag: 'v24.1.0'
+          hardened: ${{ matrix.hardened }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
       - name: Try to run E+ with full path
