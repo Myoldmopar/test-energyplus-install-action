@@ -4,17 +4,26 @@ jobs:
     strategy:
       matrix:
         include:
+          - os: ubuntu-20.04
+            os_version: "20.04"
+            hardened: false
           - os: ubuntu-22.04
+            os_version: 0
             hardened: false
           - os: ubuntu-24.04
+            os_version: 0
             hardened: false
           - os: macos-12
+            os_version: 0
             hardened: false
           - os: macos-14
+            os_version: 0
             hardened: false
           - os: windows-latest
+            os_version: 0
             hardened: false
           - os: windows-latest
+            os_version: 0
             hardened: true            
     runs-on: ${{ matrix.os }}
     name: Let us install EnergyPlus
@@ -30,6 +39,7 @@ jobs:
         with:
           tag: 'v24.1.0'
           hardened: ${{ matrix.hardened }}
+          os_version_override: ${{ matrix.os_version }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
       - name: Try to run E+ with full path
