@@ -35,7 +35,7 @@ jobs:
           python-version: 3.12
       - name: EnergyPlus Install Script
         id: eplus
-        uses: myoldmopar/energyplus-install@501b5f9b3751135aa1ca43ace0b745d45ed5b6dc
+        uses: myoldmopar/energyplus-install@v0.3
         with:
           tag: 'v24.1.0'
           hardened: ${{ matrix.hardened }}
